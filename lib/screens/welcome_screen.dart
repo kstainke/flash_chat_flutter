@@ -1,11 +1,40 @@
+import 'package:flash_chat_flutter/screens/login_screen.dart';
+import 'package:flash_chat_flutter/screens/registration_screen.dart';
+import 'package:flash_chat_flutter/widgets/reusable_button.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static const id = 'welcome_screen';
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  // late AnimationController controller;
+  // late Animation animation;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   controller = AnimationController(
+  //     duration: Duration(seconds: 1),
+  //     vsync: this,
+  //   );
+
+  //   animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
+
+  //   controller.forward();
+
+  //   controller.addListener(() {
+  //     setState(() {});
+  //     print(animation.value);
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,15 +47,32 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: 60.0,
+                Hero(
+                  tag: 'logo',
+                  child: Container(
+                    child: Image.asset('images/logo.png'),
+                    height: 60,
+                  ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
+                SizedBox(
+                  width: 250.0,
+                  child: DefaultTextStyle(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 45.0,
+                      fontWeight: FontWeight.w900,
+                    ),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText(
+                          'Flash Chat',
+                          speed: const Duration(milliseconds: 50),
+                        ),
+                      ],
+                      onTap: () {
+                        print("Tap Event");
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -34,42 +80,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
+            ReusableButton(
                 color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to login screen.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
+                buttonText: 'Log In',
+                routeId: LoginScreen.id),
+            ReusableButton(
                 color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to registration screen.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                  ),
-                ),
-              ),
-            ),
+                buttonText: 'Regiser',
+                routeId: RegistrationScreen.id),
           ],
         ),
       ),
