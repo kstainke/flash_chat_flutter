@@ -81,13 +81,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               height: 48.0,
             ),
             ReusableButton(
-                color: Colors.lightBlueAccent,
-                buttonText: 'Log In',
-                routeId: LoginScreen.id),
+              color: Colors.lightBlueAccent,
+              buttonText: 'Log In',
+              onPressed: () {
+                Navigator.pushNamed(context, LoginScreen.id);
+              },
+            ),
             ReusableButton(
-                color: Colors.blueAccent,
-                buttonText: 'Regiser',
-                routeId: RegistrationScreen.id),
+              color: Colors.blueAccent,
+              buttonText: 'Regiser',
+              onPressed: () {
+                Navigator.pushNamed(context, RegistrationScreen.id);
+              },
+            ),
           ],
         ),
       ),

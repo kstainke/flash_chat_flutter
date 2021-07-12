@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ReusableButton extends StatelessWidget {
   const ReusableButton(
-      {required this.color, required this.buttonText, required this.routeId});
+      {required this.color, required this.buttonText, required this.onPressed});
 
   final color;
   final buttonText;
-  final routeId;
+  final onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,7 @@ class ReusableButton extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(30.0),
         child: MaterialButton(
-          onPressed: () {
-            Navigator.pushNamed(context, routeId);
-          },
+          onPressed: onPressed,
           minWidth: 200.0,
           height: 42.0,
           child: Text(
